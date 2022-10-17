@@ -22,7 +22,6 @@ const LoginPageForm = (props) => {
 	const { setAuth } = useAuth();
 
 	const navigate = useNavigate();
-	const location = useLocation();
 
 	const [success, setSuccess] = useState(false);
 

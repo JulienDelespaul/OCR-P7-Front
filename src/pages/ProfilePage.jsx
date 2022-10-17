@@ -2,7 +2,7 @@ import ProfilePageContainer from "../components/ProfilePageContainer";
 
 const ProfilePage = () => {
 	return (
-		<div className="h-screen flex  justify-center">
+		<div className="flex justify-center">
 			<ProfilePageContainer />
 		</div>
 	);

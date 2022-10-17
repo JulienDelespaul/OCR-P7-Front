@@ -74,9 +74,9 @@ const PostsPageEditPost = ({ post, setShowModal }) => {
 	const { register, handleSubmit, reset } = useForm();
 
 	return (
-		<form onSubmit={handleSubmit(HandleInput)} className="h-min  w-full text-lg flex flex-col justify-between object-top ">
+		<form onSubmit={handleSubmit(HandleInput)} className="w-full text-base flex flex-col justify-between object-top ">
 			<textarea
-				className="p-4 h-32 flex text-wrap bg-secondary text-tertiary  border-1 border-black resize-none"
+				className="p-2 max-h-32 flex text-wrap bg-secondary text-tertiary  border-1 border-black resize-none"
 				placeholder="..."
 				type="text"
 				name="content"
@@ -85,14 +85,14 @@ const PostsPageEditPost = ({ post, setShowModal }) => {
 			>
 				{freshPost.content}
 			</textarea>
-			<div>{image.img && <img src={image.imgUrl} alt="preview" className="h-80 mt-4 mx-auto rounded-2xl object-cover" />}</div>
-			<div>{freshPost.imageUrl && !image.img && <img src={freshPost.imageUrl} alt="preview" className="h-80 mt-4 mx-auto rounded-2xl object-cover" />}</div>
-			<div className="flex justify-end">
-				<label className="brutal-btn m-4 cursor-pointer">
+			<div>{image.img && <img src={image.imgUrl} alt="preview" className=" max-h-80 mt-4 mx-auto object-cover rounded-2xl" />}</div>
+			<div>{freshPost.imageUrl && !image.img && <img src={freshPost.imageUrl} alt="preview" className="max-h-80 mt-4 mx-auto rounded-2xl object-cover" />}</div>
+			<div className="flex justify-end text-base gap-2 py-2">
+				<label className="brutal-btn cursor-pointer">
 					{freshPost.imageUrl || image.imgUrl !== null ? <span>Changer d'image</span> : <span>Ajouter une image</span>}
 					<input type="file" className="hidden" name="image" {...register("image")} onChange={HandleImageSelection} />{" "}
 				</label>
-				<button className="brutal-btn m-4">Poster</button>
+				<button className="brutal-btn">Poster</button>
 			</div>
 		</form>
 	);

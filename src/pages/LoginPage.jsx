@@ -2,7 +2,7 @@ import LoginPageContainer from "../components/LoginPageContainer";
 
 const LoginPage = () => {
 	return (
-		<div className="h-screen flex items-center justify-center">
+		<div className="h-screen flex items-start justify-center">
 			<LoginPageContainer />
 		</div>
 	);

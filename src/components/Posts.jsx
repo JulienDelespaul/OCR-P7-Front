@@ -54,19 +54,19 @@ const Posts = () => {
 				return (
 					<li
 						ref={lastPostRef}
-						className="h-min mt-4 p-4 w-full flex flex-col justify-between object-top border-2 border-tertiary border-b-8 border-r-8 rounded-2xl"
+						className="h-min mt-4 p-2 w-full flex flex-col justify-between object-top border-2 border-tertiary border-b-8 border-r-8 rounded-2xl"
 						key={post._id}
 					>
-						<div className="flex flex-row justify-between">
+						<div className="flex flex-col justify-between">
 							<div>{post.userId}</div>
 							<div className="text-base">Il y a {ElapsedTime(post?.createdAt)}</div>
 						</div>
 						<div className="bg-secondary mt-2 p-4 border-tertiary border-2">{post?.content}</div>
-						<div>{post?.imageUrl && <img src={post.imageUrl} alt="post" className=" h-80 mt-4 mx-auto object-cover rounded-2xl" />}</div>
+						<div>{post?.imageUrl && <img src={post.imageUrl} alt="post" className=" max-h-80 mt-4 mx-auto object-cover rounded-2xl" />}</div>
 						<div className="flex justify-between mt-4">
 							<div className="flex flex-row">
 								<LikeButton post={post} />
-								{post.likes !== 0 && <p className="pl-2 pt-2">{post.likes}</p>}
+								{post.likes !== 0 && <p className="pl-2">{post.likes}</p>}
 							</div>
 							<div className="flex flex-row gap-x-4  ">
 								<div className="flex flex-row ">{(post.userId === auth.userId || auth.role === "admin") && <Modal post={post} />}</div>
@@ -78,21 +78,21 @@ const Posts = () => {
 			}
 			return (
 				<li
-					className="h-min mt-2 p-4 w-full flex flex-col justify-between object-top border-2 border-tertiary border-b-8 border-r-8 rounded-2xl"
+					className="h-min mt-2 p-2 w-full flex flex-col justify-between object-top border-2 border-tertiary border-b-8 border-r-8 rounded-2xl"
 					key={post._id}
 				>
-					<div className="flex flex-row justify-between">
+					<div className="flex flex-col justify-between">
 						<div>{post.userId}</div>
-						<div className="text-base">Il y a {ElapsedTime(post?.createdAt)}</div>
+						<div>Il y a {ElapsedTime(post?.createdAt)}</div>
 					</div>
 					<div className="bg-secondary mt-2 p-4 border-tertiary border-2">{post?.content}</div>
-					<div>{post?.imageUrl && <img src={post.imageUrl} alt="post" className=" h-80 mt-4 mx-auto object-cover rounded-2xl" />}</div>
+					<div>{post?.imageUrl && <img src={post.imageUrl} alt="post" className=" max-h-80 mt-4 mx-auto object-cover rounded-2xl" />}</div>
 					<div className="flex justify-between mt-4">
-						<div className="flex flex-row">
+						<div className="flex flex-row pb-2 self-center">
 							<LikeButton post={post} />
-							{post.likes !== 0 && <p className="pl-2 pt-2">{post.likes}</p>}
+							{post.likes !== 0 && <p className="pl-2">{post.likes}</p>}
 						</div>
-						<div className="flex flex-row gap-x-4  ">
+						<div className="flex flex-row pr-2 pb-2 gap-x-4  ">
 							<div className="flex flex-row ">{(post.userId === auth.userId || auth.role === "admin") && <Modal post={post} />}</div>
 							<div className="flex flex-row ">{(post.userId === auth.userId || auth.role === "admin") && <Delete post={post} />}</div>
 						</div>
@@ -103,10 +103,8 @@ const Posts = () => {
 	});
 
 	return (
-		<article className="text-tertiary text-lg">
-			<h2 className="h-min mt-2 p-2 pl-4 w-full flex flex-col justify-between object-top border-2 text-primary font-bold text-3xl border-primary border-b-8 border-r-8 rounded-2xl">
-				Contributions
-			</h2>
+		<article className="text-tertiary text-base w-full">
+			<h2 className="h-min mt-2 p-2 border-2 text-primary font-bold text-xl border-primary border-b-8 border-r-8 rounded-2xl">Contributions</h2>
 			<ul className="flex flex-col ">{content}</ul>
 			{isFetchingNextPage && <p className="text-primary">Chargement...</p>}
 		</article>

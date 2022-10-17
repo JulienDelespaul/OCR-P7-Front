@@ -1,8 +1,8 @@
 import PostsPageHeader from "./PostsPageComponents/PostsPageHeader";
 import PostsPageAddPost from "./PostsPageComponents/PostsPageAddPost";
-import PostsPagePostsView from "./PostsPageComponents/PostsPagePostsView";
 import PostsPageNavMenu from "./PostsPageComponents/PostsPageNavMenu";
 import useNavIsOpened from "../hooks/useNavIsOpened";
+import Posts from "./Posts";
 
 const PostsPageContainer = () => {
 	const { navMenuOpened } = useNavIsOpened();
@@ -13,9 +13,9 @@ const PostsPageContainer = () => {
 			<PostsPageHeader />
 			{navMenuOpened && <PostsPageNavMenu />}
 			{!navMenuOpened && (
-				<div className="overflow-y-scroll">
+				<div className="overflow-y-scroll w-full">
 					<PostsPageAddPost />
-					<PostsPagePostsView />
+					<Posts />
 				</div>
 			)}
 		</div>

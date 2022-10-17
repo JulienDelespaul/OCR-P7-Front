@@ -19,7 +19,7 @@ const DeletePost = ({ post }) => {
 	};
 	return (
 		<button onClick={deletePost} className="brutal-btn">
-			Supprimer le post
+			Supprimer
 		</button>
 	);
 };

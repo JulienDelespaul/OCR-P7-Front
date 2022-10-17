@@ -24,7 +24,6 @@ function App() {
 				</Route>
 				{/* Redirect to login page / catch all */}
 				<Route path="unauthorized" element={<Unauthorized />} />
-				<Route path="design" element={<PostsPage />} />
 
 				<Route path="*" element={<LoginPage />} />
 			</Route>

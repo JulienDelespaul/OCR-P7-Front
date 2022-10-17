@@ -16,7 +16,7 @@ const UnauthorizedPage = () => {
 					<h1 className="text-primary text-lg font-bold text-center">Désolé !</h1>
 					<p className=" text-lg text-left">Vous n'avez pas l'autorisation nécessaire pour accéder à ce contenu.</p>
 					<p className="text-lg text-left">Vous allez être redirigé vers la page de connexion.</p>
-					{timedRedirect()}
+					{/* {timedRedirect()} */}
 				</div>
 			</div>
 		</div>

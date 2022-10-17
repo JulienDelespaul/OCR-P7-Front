@@ -14,7 +14,7 @@ const PostsPageNavMenu = () => {
 
 	return (
 		<div className="flex flex-col items-center h-full w-full  bg-white border-2 border-primary border-b-8 border-r-8 rounded-2xl">
-			<ul className=" p-4 w-full font-bold text-lg ">
+			<ul className=" p-2 w-full font-bold text-lg ">
 				<li className="pr-4 hover:text-primary">
 					<Link to="/profile"> Profil</Link>
 				</li>

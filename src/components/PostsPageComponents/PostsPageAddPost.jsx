@@ -54,21 +54,21 @@ const PostsPageAddPost = () => {
 			onSubmit={handleSubmit(HandleInput)}
 			className="h-min  w-full text-lg flex flex-col justify-between object-top border-2 border-tertiary border-b-8 border-r-8 rounded-2xl "
 		>
-			<label className="pl-4 pt-4 pb-1 font-bold text-primary">Exprimez-vous !</label>
+			<label className="pl-2 pt-2 pb-1 font-bold text-base text-primary">Exprimez-vous !</label>
 			<textarea
-				className="p-4 mx-4 h-32 flex text-wrap bg-secondary text-tertiary  border-1 border-black resize-none"
+				className="px-2 mx-2 h-16 flex text-base text-wrap bg-secondary text-tertiary  border-1 border-black resize-none"
 				placeholder="..."
 				type="text"
 				name="content"
 				{...register("content")}
 			/>
 			<div>{image.img && <img src={image.imgUrl} alt="preview" className="h-80 mt-4 mx-auto rounded-2xl object-cover" />}</div>
-			<div className="flex justify-end">
-				<label className="brutal-btn m-4 cursor-pointer">
+			<div className="flex justify-end m-2 mr-4 mb-4 text-base gap-2 ">
+				<label className="brutal-btn  cursor-pointer">
 					{image?.img ? <span>Changer d'image</span> : <span>Ajouter une image</span>}
 					<input type="file" className="hidden" name="image" {...register("image")} onChange={HandleImageSelection} />{" "}
 				</label>
-				<button className="brutal-btn m-4">Poster</button>
+				<button className="brutal-btn ">Poster</button>
 			</div>
 		</form>
 	);
