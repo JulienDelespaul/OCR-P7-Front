@@ -12,7 +12,7 @@ const Posts = () => {
 	const { refresh, setRefresh } = usePostsRefresh();
 	const { auth } = useAuth();
 
-	const { fetchNextPage, hasNextPage, isFetchingNextPage, data, status, error, refetch } = useInfiniteQuery(
+	const { fetchNextPage, hasNextPage, isFetchingNextPage, data, refetch } = useInfiniteQuery(
 		[`/posts`],
 		async ({ pageParam = 1 }) => {
 			const response = await axios.get(`/post/page/${pageParam}`, { headers: { Authorization: `Bearer ${auth.token}` } });

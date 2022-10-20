@@ -1,5 +1,5 @@
 import "../Button/button.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import axios from "../../Api/axios";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
@@ -9,16 +9,9 @@ const ProfilePage = () => {
 	const { auth } = useAuth();
 	const [profile, setProfile] = useState({});
 	const id = auth.userId;
+	const [editProfile, setEditProfile] = useState(true);
 
-	const { register, handleSubmit, reset, formState } = useForm({
-		defaultValues: {
-			firstName: profile.firstName,
-			lastName: profile.lastName,
-			position: profile.position,
-			department: profile.department,
-			bio: profile.bio,
-		},
-	});
+	const { register, handleSubmit, reset, formState, setFocus } = useForm({});
 
 	useEffect(() => {
 		let isMounted = true;
@@ -53,12 +46,22 @@ const ProfilePage = () => {
 				headers: { Authorization: `Bearer ${auth.token}` },
 			});
 			console.log(response);
+			reset(profile, { keepValues: true });
+			setEditProfile(true);
 		} catch (error) {
 			console.log(error);
 		}
 	};
+	const [focusTrigger, setFocusTrigger] = useState(false);
 
-	// formState.isDirty ?
+	const handleEdit = () => {
+		setEditProfile(false);
+		setFocusTrigger(!focusTrigger);
+	};
+
+	useEffect(() => {
+		setFocus("firstName");
+	}, [focusTrigger, setFocus]);
 
 	return (
 		<div className="h-max mt-4 p-4 w-full flex flex-col  object-top border-2 border-tertiary border-b-8 border-r-8 rounded-2xl">
@@ -71,30 +74,70 @@ const ProfilePage = () => {
 					<label className="text-primary" htmlFor="firstName">
 						Prénom :
 					</label>
-					<input className="text-tertiary " type="text" name="firstName" id="firstName" {...register("firstName")} />
+					<input
+						className={"text-tertiary " + (formState.dirtyFields.firstName ? "bg-secondary" : "")}
+						type="text"
+						name="firstName"
+						id="firstName"
+						disabled={editProfile}
+						{...register("firstName")}
+					/>
 				</div>
 				<div>
 					<label className="text-primary" htmlFor="lastName">
 						Nom :
 					</label>
-					<input type="text" name="lastName" id="lastName" className="text-tertiary " {...register("lastName")} />
+					<input
+						type="text"
+						name="lastName"
+						id="lastName"
+						className={"text-tertiary " + (formState.dirtyFields.lastName ? "bg-secondary" : "")}
+						disabled={editProfile}
+						{...register("lastName")}
+					/>
 				</div>
 				<div>
 					<label className="text-primary" htmlFor="position">
 						Poste :
 					</label>
-					<input type="text" name="position" id="position" className="text-tertiary " {...register("position")} />
+					<input
+						type="text"
+						name="position"
+						id="position"
+						className={"text-tertiary " + (formState.dirtyFields.position ? "bg-secondary" : "")}
+						disabled={editProfile}
+						{...register("position")}
+					/>
 				</div>
 				<div>
 					<label className="text-primary" htmlFor="department">
-						Département :
+						Service :
 					</label>
-					<input type="text" name="department" id="department" className="text-tertiary " {...register("department")}></input>
+					<input
+						type="text"
+						name="department"
+						id="department"
+						className={"text-tertiary " + (formState.dirtyFields.department ? "bg-secondary" : "")}
+						disabled={editProfile}
+						{...register("department")}
+					></input>
 				</div>
 				<label className="text-primary" htmlFor="bio">
 					Bio :
 				</label>
-				<textarea name="bio" id="bio" rows="5" {...register("bio")} className="text-tertiary " />
+				<textarea
+					name="bio"
+					id="bio"
+					rows="5"
+					disabled={editProfile}
+					{...register("bio")}
+					className={"text-tertiary " + (formState.dirtyFields.bio ? "bg-secondary" : "")}
+				/>
+				{editProfile && (
+					<button className="brutal-btn" type="button" onClick={handleEdit}>
+						Modifier le profil
+					</button>
+				)}
 				{formState.isDirty && <button className="brutal-btn">Enregistrer les modifications</button>}
 			</form>
 		</div>
