@@ -1,5 +1,5 @@
 import "../Button/button.css";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import axios from "../../Api/axios";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";

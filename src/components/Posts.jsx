@@ -58,7 +58,9 @@ const Posts = () => {
 						key={post._id}
 					>
 						<div className="flex flex-col justify-between">
-							<div>{post.userId}</div>
+							<div>
+								{post.user.firstName} {post.user.lastName}
+							</div>
 							<div className="text-base">Il y a {ElapsedTime(post?.createdAt)}</div>
 						</div>
 						<div className="bg-secondary mt-2 p-4 border-tertiary border-2">{post?.content}</div>
@@ -82,7 +84,9 @@ const Posts = () => {
 					key={post._id}
 				>
 					<div className="flex flex-col justify-between">
-						<div>{post.userId}</div>
+						<div>
+							{post.user.firstName} {post.user.lastName}
+						</div>
 						<div>Il y a {ElapsedTime(post?.createdAt)}</div>
 					</div>
 					<div className="bg-secondary mt-2 p-4 border-tertiary border-2">{post?.content}</div>

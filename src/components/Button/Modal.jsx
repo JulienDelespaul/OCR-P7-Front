@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Edit from "./EditPost.jsx";
 import PostsPageEditPost from "../PostsPageComponents/PostsPageEditPost.jsx";
+import ProfilePage from "../ProfilePageComponents/ProfilePageContent.jsx";
 
 const Modal = ({ post }) => {
 	const [showModal, setShowModal] = useState(false);
@@ -12,9 +13,8 @@ const Modal = ({ post }) => {
 				<>
 					<div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ">
 						<div className="relative w-10/12 max-h-screen  mx-auto max-w-3xl">
-							{/*content*/}
+							{/* <ProfilePage setShowModal={setShowModal} /> */}
 							<div className="border-2 border-tertiary  border-b-8 border-r-8 rounded-2xl relative flex flex-col w-full bg-white outline-none focus:outline-none px-4">
-								{/*header*/}
 								<div className="flex items-start justify-between text-lg py-2 border-b border-solid border-slate-200 rounded-t">
 									<h3 className="font-semibold">Modifier le post</h3>
 									<button
@@ -25,9 +25,7 @@ const Modal = ({ post }) => {
 										Fermer
 									</button>
 								</div>
-								{/*body*/}
 								<PostsPageEditPost setShowModal={setShowModal} post={post} />
-								{/*footer*/}
 							</div>
 						</div>
 					</div>
