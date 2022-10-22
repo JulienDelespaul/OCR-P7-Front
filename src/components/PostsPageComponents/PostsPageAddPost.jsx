@@ -47,22 +47,41 @@ const PostsPageAddPost = () => {
 		console.log(e.target.files[0]);
 	};
 
-	const { register, handleSubmit, reset } = useForm();
+	const HandleReset = (e) => {
+		e.preventDefault();
+		setImage({ img: null, imgUrl: null });
+		reset();
+	};
+
+	const { register, handleSubmit, reset, formState } = useForm({
+		defaultValues: {
+			content: "",
+		},
+	});
 
 	return (
 		<form
 			onSubmit={handleSubmit(HandleInput)}
 			className="h-min  w-full text-lg flex flex-col justify-between object-top border-2 border-tertiary border-b-8 border-r-8 rounded-2xl "
 		>
-			<label className="pl-2 pt-2 pb-1 font-bold text-base text-primary">Exprimez-vous !</label>
+			<div className="flex flex-row justify-between p-2">
+				<label className=" pt-2 pb-1 font-bold text-base text-primary">Exprimez-vous !</label>
+				{image?.img || formState.isDirty ? (
+					<button className="border-2 border-primary text-primary px-1" onClick={HandleReset}>
+						<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+						</svg>
+					</button>
+				) : null}
+			</div>
 			<textarea
-				className="px-2 mx-2 h-16 flex text-base text-wrap bg-secondary text-tertiary  border-1 border-black resize-none"
+				className="px-2 mx-2 h-16 flex text-base text-wrap bg-secondary text-tertiary resize-none"
 				placeholder="..."
 				type="text"
 				name="content"
 				{...register("content")}
 			/>
-			<div>{image.img && <img src={image.imgUrl} alt="preview" className="h-80 mt-4 mx-auto rounded-2xl object-cover" />}</div>
+			<div>{image.img && <img src={image.imgUrl} alt="preview" className=" max-h-80 sm:h-96  mt-4 mx-auto object-contain rounded-2xl" />}</div>
 			<div className="flex justify-end m-2 mr-4 mb-4 text-base gap-2 ">
 				<label className="brutal-btn  cursor-pointer">
 					{image?.img ? <span>Changer d'image</span> : <span>Ajouter une image</span>}

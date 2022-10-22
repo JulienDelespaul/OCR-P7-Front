@@ -1,20 +1,19 @@
-import useNavIsOpened from "../../hooks/useNavIsOpened";
+import ProfileModal from "../Button/profileModal";
+import useAuth from "../../hooks/useAuth";
 
 const PostsPageHeader = () => {
-	const { navMenuOpened, setNavMenuOpened } = useNavIsOpened();
-
-	const handleNavMenuOpen = () => {
-		setNavMenuOpened(!navMenuOpened);
-	};
+	const { auth } = useAuth();
 
 	return (
-		<div className="sticky top-0 mb-2 w-full z-10 flex justify-between items-center object-top border-2 bg-white text-tertiary border-primary border-b-8 border-r-8 rounded-2xl ">
-			<h1 className="p-2 flex items-baseline font-bold text-primary text-xl ">Groupomania</h1>
-			<button onClick={handleNavMenuOpen} className="p-2 flex items-baseline font-bold text-primary text-xl ">
-				<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-					<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-				</svg>
-			</button>
+		<div className="flex justify-between items-center w-full sticky top-0 bg-white">
+			<div className="mb-2 w-full z-10 flex justify-between items-center object-top border-2 text-tertiary border-primary border-b-8 border-r-8 rounded-2xl ">
+				{auth.role === "admin" ? (
+					<h1 className="p-2 flex items-baseline font-bold text-primary text-xl ">Groupomania (ADMINISTRATEUR)</h1>
+				) : (
+					<h1 className="p-2 flex items-baseline font-bold text-primary text-xl ">Groupomania</h1>
+				)}
+				<ProfileModal />
+			</div>
 		</div>
 	);
 };

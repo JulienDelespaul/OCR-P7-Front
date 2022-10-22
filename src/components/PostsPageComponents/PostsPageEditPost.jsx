@@ -76,17 +76,17 @@ const PostsPageEditPost = ({ post, setShowModal }) => {
 	return (
 		<form onSubmit={handleSubmit(HandleInput)} className="w-full text-base flex flex-col justify-between object-top ">
 			<textarea
-				className="p-2 max-h-32 flex text-wrap bg-secondary text-tertiary  border-1 border-black resize-none"
+				className="p-2 max-h-32 flex text-wrap bg-secondary text-tertiary  border-2 border-black resize-none"
 				placeholder="..."
 				type="text"
 				name="content"
-				// value={post.content}
+				defaultValue={freshPost.content}
 				{...register("content")}
-			>
-				{freshPost.content}
-			</textarea>
+			></textarea>
 			<div>{image.img && <img src={image.imgUrl} alt="preview" className=" max-h-80 mt-4 mx-auto object-cover rounded-2xl" />}</div>
-			<div>{freshPost.imageUrl && !image.img && <img src={freshPost.imageUrl} alt="preview" className="max-h-80 mt-4 mx-auto rounded-2xl object-cover" />}</div>
+			<div>
+				{freshPost.imageUrl && !image.img && <img src={freshPost.imageUrl} alt="preview" className="max-h-80 sm:h-96 mt-4 mx-auto rounded-2xl object-cover" />}
+			</div>
 			<div className="flex justify-end text-base gap-2 py-2">
 				<label className="brutal-btn cursor-pointer">
 					{freshPost.imageUrl || image.imgUrl !== null ? <span>Changer d'image</span> : <span>Ajouter une image</span>}

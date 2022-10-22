@@ -64,7 +64,7 @@ const Posts = () => {
 							<div className="text-base">Il y a {ElapsedTime(post?.createdAt)}</div>
 						</div>
 						<div className="bg-secondary mt-2 p-4 border-tertiary border-2">{post?.content}</div>
-						<div>{post?.imageUrl && <img src={post.imageUrl} alt="post" className=" max-h-80 mt-4 mx-auto object-cover rounded-2xl" />}</div>
+						<div>{post?.imageUrl && <img src={post.imageUrl} alt="post" className="h-80 sm:h-96 lg:h-112  mt-4 mx-auto object-contain rounded-2xl" />}</div>
 						<div className="flex justify-between mt-4">
 							<div className="flex flex-row">
 								<LikeButton post={post} />
@@ -90,7 +90,7 @@ const Posts = () => {
 						<div>Il y a {ElapsedTime(post?.createdAt)}</div>
 					</div>
 					<div className="bg-secondary mt-2 p-4 border-tertiary border-2">{post?.content}</div>
-					<div>{post?.imageUrl && <img src={post.imageUrl} alt="post" className=" max-h-80 mt-4 mx-auto object-cover rounded-2xl" />}</div>
+					<div>{post?.imageUrl && <img src={post.imageUrl} alt="post" className="h-80 sm:h-96 lg:h-112 mt-4 mx-auto object-contain rounded-2xl" />}</div>
 					<div className="flex justify-between mt-4">
 						<div className="flex flex-row pb-2 self-center">
 							<LikeButton post={post} />

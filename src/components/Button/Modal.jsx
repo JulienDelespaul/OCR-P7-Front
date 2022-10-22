@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Edit from "./EditPost.jsx";
 import PostsPageEditPost from "../PostsPageComponents/PostsPageEditPost.jsx";
-import ProfilePage from "../ProfilePageComponents/ProfilePageContent.jsx";
 
 const Modal = ({ post }) => {
 	const [showModal, setShowModal] = useState(false);

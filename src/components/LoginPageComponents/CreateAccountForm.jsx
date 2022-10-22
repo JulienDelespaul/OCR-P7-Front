@@ -62,6 +62,11 @@ const CreateAccountForm = (props) => {
 		formState: { errors },
 	} = useForm({ resolver: yupResolver(validationSchema), mode: "onTouched" });
 
+	const HandleBackButton = (e) => {
+		e.preventDefault();
+		props.toggleAccountForm();
+	};
+
 	return (
 		<div className="p-4 lg:w-[35%] max-w-md border-2 border-primary border-b-8 border-r-8 rounded-2xl text-xl">
 			{success ? (
@@ -94,7 +99,7 @@ const CreateAccountForm = (props) => {
 					</div>
 
 					<div className="flex flex-row justify-between pt-4 pb-2 text-lg">
-						<button className="text-base brutal-btn" onClick={props.toggleAccountForm}>
+						<button className="text-base brutal-btn" onClick={HandleBackButton} type="button">
 							<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
 							</svg>

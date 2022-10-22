@@ -6,7 +6,7 @@ const PostsPage = () => {
 	return (
 		<NavIsOpenedProvider>
 			<PostsRefreshProvider>
-				<div className="h-screen flex  justify-center">
+				<div className="h-screen max-w-7xl mx-auto">
 					<PostsPageContainer />
 				</div>
 			</PostsRefreshProvider>

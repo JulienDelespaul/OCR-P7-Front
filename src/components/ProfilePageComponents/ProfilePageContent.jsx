@@ -3,10 +3,11 @@ import { useState, useEffect } from "react";
 import axios from "../../Api/axios";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
-import BackButton from "../Button/BackButton";
+import usePostsRefresh from "../../hooks/usePostsRefresh";
 
-const ProfilePage = () => {
+const ProfilePage = (setShowProfileModal) => {
 	const { auth } = useAuth();
+	const { setRefresh } = usePostsRefresh();
 	const [profile, setProfile] = useState({});
 	const id = auth.userId;
 	const [editProfile, setEditProfile] = useState(true);
@@ -46,6 +47,7 @@ const ProfilePage = () => {
 				headers: { Authorization: `Bearer ${auth.token}` },
 			});
 			console.log(response);
+			setRefresh(true);
 			reset(profile, { keepValues: true });
 			setEditProfile(true);
 		} catch (error) {
@@ -64,15 +66,11 @@ const ProfilePage = () => {
 	}, [focusTrigger, setFocus]);
 
 	return (
-		<div className="h-max mt-4 p-4 w-full flex flex-col  object-top border-2 border-tertiary border-b-8 border-r-8 rounded-2xl">
-			<div className="flex flex-row justify-between">
-				<h1 className="text-primary text-xl pb-1">Profil de l'utilisateur </h1>
-				<BackButton />
-			</div>
+		<div className="h-max mt-4 p-4 w-full flex flex-col  object-top ">
 			<form onSubmit={handleSubmit(HandleInput)} className="flex flex-col gap-1">
 				<div>
 					<label className="text-primary" htmlFor="firstName">
-						Prénom :
+						Prénom :{" "}
 					</label>
 					<input
 						className={"text-tertiary " + (formState.dirtyFields.firstName ? "bg-secondary" : "")}
@@ -85,7 +83,7 @@ const ProfilePage = () => {
 				</div>
 				<div>
 					<label className="text-primary" htmlFor="lastName">
-						Nom :
+						Nom :{" "}
 					</label>
 					<input
 						type="text"
@@ -98,7 +96,7 @@ const ProfilePage = () => {
 				</div>
 				<div>
 					<label className="text-primary" htmlFor="position">
-						Poste :
+						Poste :{" "}
 					</label>
 					<input
 						type="text"
@@ -111,7 +109,7 @@ const ProfilePage = () => {
 				</div>
 				<div>
 					<label className="text-primary" htmlFor="department">
-						Service :
+						Service :{" "}
 					</label>
 					<input
 						type="text"
@@ -123,7 +121,7 @@ const ProfilePage = () => {
 					></input>
 				</div>
 				<label className="text-primary" htmlFor="bio">
-					Bio :
+					Bio :{" "}
 				</label>
 				<textarea
 					name="bio"
@@ -131,7 +129,7 @@ const ProfilePage = () => {
 					rows="5"
 					disabled={editProfile}
 					{...register("bio")}
-					className={"text-tertiary " + (formState.dirtyFields.bio ? "bg-secondary" : "")}
+					className={"text-tertiary resize-none" + (formState.dirtyFields.bio ? "bg-secondary" : "")}
 				/>
 				{editProfile && (
 					<button className="brutal-btn" type="button" onClick={handleEdit}>
