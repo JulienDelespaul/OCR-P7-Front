@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../Api/axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LOGIN_URL = "/auth/login";
 
@@ -34,15 +34,16 @@ const LoginPageForm = (props) => {
 			setAuth({ userId, token, role, email });
 			setSuccess(true);
 		} catch (error) {
-			console.log(error);
+			setError("invalidCredentials", { message: "Les identifiants sont incorrects." });
 			console.log(error.response?.data);
 		}
 	};
 	const {
 		register,
 		handleSubmit,
+		setError,
 		formState: { errors },
-	} = useForm({ resolver: yupResolver(validationSchema), mode: "onTouched" });
+	} = useForm({ resolver: yupResolver(validationSchema), mode: "onChange" });
 
 	const timedRedirect = () => {
 		setTimeout(() => {
@@ -59,7 +60,7 @@ const LoginPageForm = (props) => {
 					{timedRedirect()}
 				</div>
 			) : (
-				<form onSubmit={handleSubmit(handleInput)}>
+				<form onSubmit={handleSubmit(handleInput)} noValidate>
 					<div className="py-2">
 						<label htmlFor="email">Votre adresse E-mail</label>
 						<input

@@ -60,7 +60,7 @@ const CreateAccountForm = (props) => {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm({ resolver: yupResolver(validationSchema), mode: "onTouched" });
+	} = useForm({ resolver: yupResolver(validationSchema), mode: "onChange" });
 
 	const HandleBackButton = (e) => {
 		e.preventDefault();
@@ -76,7 +76,7 @@ const CreateAccountForm = (props) => {
 					{timedRedirect()}
 				</div>
 			) : (
-				<form onSubmit={handleSubmit(handleInput)}>
+				<form onSubmit={handleSubmit(handleInput)} noValidate>
 					<div className="py-2">
 						<label htmlFor="email">Votre adresse E-mail</label>
 						<input
