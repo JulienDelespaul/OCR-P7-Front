@@ -15,10 +15,10 @@ function App() {
 				{/* Private routes */}
 				<Route element={<RequireAuth allowedRoles={["user", "admin"]} />}>
 					<Route path="posts" element={<PostsPage />} />
-					<Route path="posts" element={<PostsPage />} />
 				</Route>
-				{/* Redirect to login page */}
+				' {/* Unauthorized routes */}'
 				<Route path="unauthorized" element={<Unauthorized />} />
+				{/* Redirect to login page */}
 				<Route path="/" element={<LoginPage />} />
 			</Route>
 		</Routes>
