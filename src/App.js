@@ -1,12 +1,28 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Layout from "./components/Layout";
-
+import useAuth from "./hooks/useAuth";
 import RequireAuth from "./components/RequireAuth";
 import LoginPage from "./pages/LoginPage";
 import PostsPage from "./pages/PostsPage";
 import Unauthorized from "./pages/UnauthorizedPage";
 
 function App() {
+	const { setAuth } = useAuth();
+	const navigate = useNavigate();
+
+	// This is a hack to get around the fact that the server doesn't send a 401 when the token is invalid.
+	useEffect(() => {
+		const authExistsInLocalStorage = sessionStorage.getItem("auth");
+		if (authExistsInLocalStorage) {
+			const userAuth = authExistsInLocalStorage;
+			console.log("userAuth", userAuth);
+			setAuth({ ...JSON.parse(userAuth) });
+			// redirect to posts page
+			navigate("/posts");
+		}
+	}, []);
+
 	return (
 		<Routes>
 			<Route path="/" element={<Layout />}>

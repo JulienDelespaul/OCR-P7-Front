@@ -1,3 +1,4 @@
+// display elapsed time since the post was created
 const ElapsedTime = (date) => {
 	const now = new Date();
 	const postDate = new Date(date);

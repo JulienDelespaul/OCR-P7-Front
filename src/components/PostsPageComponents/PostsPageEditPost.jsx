@@ -5,6 +5,7 @@ import axios from "../../Api/axios";
 import useAuth from "../../hooks/useAuth";
 import usePostsRefresh from "../../hooks/usePostsRefresh";
 
+//is used in the edit post modal, contains all the logic to edit a post
 const PostsPageEditPost = ({ post, setShowModal }) => {
 	const [image, setImage] = useState({ img: null, imgUrl: null });
 	const [freshPost, setFreshPost] = useState(post);
@@ -12,6 +13,7 @@ const PostsPageEditPost = ({ post, setShowModal }) => {
 	const { setPostId, setRefresh } = usePostsRefresh();
 	const id = post._id;
 
+	// gets fresh post data from the server
 	useEffect(() => {
 		let isMounted = true;
 
@@ -36,6 +38,7 @@ const PostsPageEditPost = ({ post, setShowModal }) => {
 		};
 	}, [id, auth.token]);
 
+	// handle form submit and put request
 	const HandleInput = async (data) => {
 		const formData = new FormData();
 		formData.append("content", data.content);
@@ -59,6 +62,7 @@ const PostsPageEditPost = ({ post, setShowModal }) => {
 		}
 	};
 
+	// handle image input
 	const HandleImageSelection = (e) => {
 		e.preventDefault();
 		// display image from input
@@ -83,9 +87,11 @@ const PostsPageEditPost = ({ post, setShowModal }) => {
 				defaultValue={freshPost.content}
 				{...register("content")}
 			></textarea>
-			<div>{image.img && <img src={image.imgUrl} alt="preview" className=" max-h-80 mt-4 mx-auto object-cover rounded-2xl" />}</div>
+			<div>{image.img && <img src={image.imgUrl} alt="preview" className="max-h-80 sm:h-96 lg:h-112 mt-4 mx-auto object-cover rounded-2xl" />}</div>
 			<div>
-				{freshPost.imageUrl && !image.img && <img src={freshPost.imageUrl} alt="preview" className="max-h-80 sm:h-96 mt-4 mx-auto rounded-2xl object-cover" />}
+				{freshPost.imageUrl && !image.img && (
+					<img src={freshPost.imageUrl} alt="preview" className="max-h-80 sm:h-96 lg:h-112 mt-4 mx-auto object-cover rounded-2xl" />
+				)}
 			</div>
 			<div className="flex justify-end text-base gap-2 py-2">
 				<label className="brutal-btn cursor-pointer">

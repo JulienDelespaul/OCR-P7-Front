@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const SIGNUP_URL = "/auth/signup";
 
+// Validation schema
 const validationSchema = Yup.object().shape({
 	email: Yup.string().email("Cet email n'est pas valide.").required("L'email est obligatoire."),
 	password: Yup.string()
@@ -19,6 +20,7 @@ const validationSchema = Yup.object().shape({
 		.oneOf([Yup.ref("password"), null], "Les mots de passe ne correspondent pas."),
 });
 
+// register form component
 const CreateAccountForm = (props) => {
 	useEffect(() => {
 		document.getElementById("email").focus();
@@ -28,6 +30,7 @@ const CreateAccountForm = (props) => {
 	const { setAuth } = useContext(AuthContext);
 	const [success, setSuccess] = useState(false);
 
+	// handle form submit, if successful, also login user
 	const handleInput = async (data) => {
 		try {
 			const response = await axios.post(SIGNUP_URL, { email: data.email, password: data.password });
@@ -56,12 +59,15 @@ const CreateAccountForm = (props) => {
 			navigate("/posts");
 		}, 3000);
 	};
+
+	// react hook form setup
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm({ resolver: yupResolver(validationSchema), mode: "onChange" });
 
+	// back button handler
 	const HandleBackButton = (e) => {
 		e.preventDefault();
 		props.toggleAccountForm();
@@ -70,6 +76,7 @@ const CreateAccountForm = (props) => {
 	return (
 		<div className="p-4 lg:w-[35%] max-w-md border-2 border-primary border-b-8 border-r-8 rounded-2xl text-xl">
 			{success ? (
+				// if register is successful, display success message, then redirect to posts page
 				<div>
 					<h1 className="text-lg font-bold text-center">Votre compte a bien été créé.</h1>
 					<p className="text-lg text-center">Vous êtes désormais connecté et vous allez être redirigé vers la page d'accueil.</p>
@@ -99,11 +106,13 @@ const CreateAccountForm = (props) => {
 					</div>
 
 					<div className="flex flex-row justify-between pt-4 pb-2 text-lg">
+						{/* back button */}
 						<button className="text-base brutal-btn" onClick={HandleBackButton} type="button">
 							<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
 							</svg>
 						</button>
+						{/* submit button */}
 						<button type="submit" className="text-base brutal-btn">
 							Créer votre compte
 						</button>

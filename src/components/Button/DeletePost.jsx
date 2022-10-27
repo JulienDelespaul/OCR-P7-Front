@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import "../Button/button.css";
 import axios from "../../Api/axios";
 
+// delete post button component
 const DeletePost = ({ post }) => {
 	const { setPostId, setRefresh } = usePostsRefresh();
 	const { auth } = useAuth();

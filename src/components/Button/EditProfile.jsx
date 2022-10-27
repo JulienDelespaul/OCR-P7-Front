@@ -1,3 +1,4 @@
+// edit profile button
 const EditProfile = ({ setShowProfileModal }) => {
 	return (
 		<button onClick={setShowProfileModal} className="p-2 flex items-baseline font-bold text-primary text-xl ">

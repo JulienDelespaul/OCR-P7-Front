@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import usePostsRefresh from "../../hooks/usePostsRefresh";
 
+// user profile and logout modal
 const ProfilePage = (setShowProfileModal) => {
 	const { auth } = useAuth();
 	const { setRefresh } = usePostsRefresh();
@@ -14,6 +15,7 @@ const ProfilePage = (setShowProfileModal) => {
 
 	const { register, handleSubmit, reset, formState, setFocus } = useForm({});
 
+	// get user profile data
 	useEffect(() => {
 		let isMounted = true;
 
@@ -34,6 +36,7 @@ const ProfilePage = (setShowProfileModal) => {
 		};
 	}, [id, auth.token, reset]);
 
+	// handle form submit and put request
 	const HandleInput = async (data) => {
 		const formData = new FormData();
 		formData.append("firstName", data.firstName);
@@ -54,6 +57,8 @@ const ProfilePage = (setShowProfileModal) => {
 			console.log(error);
 		}
 	};
+
+	// toggle "edit mode", input fields are enabled and cursor focus is set to the first input field
 	const [focusTrigger, setFocusTrigger] = useState(false);
 
 	const handleEdit = () => {
@@ -66,13 +71,14 @@ const ProfilePage = (setShowProfileModal) => {
 	}, [focusTrigger, setFocus]);
 
 	return (
-		<div className="h-max mt-4 p-4 w-full flex flex-col  object-top ">
+		<div className="h-max mt-4 pb-4 w-full flex flex-col  object-top ">
 			<form onSubmit={handleSubmit(HandleInput)} className="flex flex-col gap-1">
 				<div>
 					<label className="text-primary" htmlFor="firstName">
 						Prénom :{" "}
 					</label>
 					<input
+						// Changes input background color if the input field is dirty
 						className={"text-tertiary " + (formState.dirtyFields.firstName ? "bg-secondary" : "")}
 						type="text"
 						name="firstName"
@@ -131,11 +137,13 @@ const ProfilePage = (setShowProfileModal) => {
 					{...register("bio")}
 					className={"text-tertiary resize-none" + (formState.dirtyFields.bio ? "bg-secondary" : "")}
 				/>
+				{/* button to toggle edit mode */}
 				{editProfile && (
 					<button className="brutal-btn" type="button" onClick={handleEdit}>
 						Modifier le profil
 					</button>
 				)}
+				{/* button to submit form, only appears if the user has changed something */}
 				{formState.isDirty && <button className="brutal-btn">Enregistrer les modifications</button>}
 			</form>
 		</div>

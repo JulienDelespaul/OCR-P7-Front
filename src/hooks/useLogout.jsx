@@ -5,6 +5,7 @@ const useLogout = () => {
 
 	const handleLogout = () => {
 		setAuth({});
+		sessionStorage.removeItem("auth");
 	};
 
 	return { handleLogout };
